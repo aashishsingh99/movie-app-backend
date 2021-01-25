@@ -21,6 +21,10 @@ const BusSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  date:{
+    type: String,
+    required: true,
+  },
   seats: {
     type: [mongoose.Schema.Types.ObjectId],
     ref: 'user',
