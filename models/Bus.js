@@ -25,10 +25,10 @@ const BusSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  seats: {
-    type: [mongoose.Schema.Types.ObjectId],
+  seats:[ {
+    type: mongoose.Schema.Types.ObjectId,
     ref: 'user',
-  }
+  }]
 });
 
 module.exports = mongoose.model('bus', BusSchema);

@@ -55,8 +55,15 @@ const getAllBuses = async (req, res) => {
 };
 
 const getBusById = async (req, res) => {
+  const options = {
+    path: 'seats',
+    options: {
+      retainNullValues: true 
+    }
+  };
   try {
-    const bus = await Bus.findById(req.params.id);
+    const bus = await Bus.findById(req.params.id).populate(options)
+    console.log(bus,'hi')
     res.send(bus);
   } catch (err) {
     log_and_send_error(err.message, 500, 'Server Error');
@@ -65,13 +72,13 @@ const getBusById = async (req, res) => {
 const bookBus = async (req, res) => {
   const { seatNumber, busId } = req.body;
   try {
-    console.log(seatNumber)
+    // console.log(seatNumber)
     const curBus = await Bus.findById(busId);
     const newSeats = curBus.seats;
     newSeats[seatNumber] = req.user.id;
      await Bus.findByIdAndUpdate(busId, { seats: newSeats });
      const updatedBus=await Bus.findById(busId);
-    console.log(updatedBus.seats[seatNumber]);
+    // console.log(updatedBus.seats[seatNumber]);
     const newBooking = new Bookings({
       user: req.user.id,
       bus: busId,
@@ -92,7 +99,8 @@ const resetBus = async (req, res) => {
     const newSeats = Array(40).fill(null);;
      await Bus.findByIdAndUpdate(busId, { seats: newSeats });
      const updatedBus=await Bus.findById(busId);
-    console.log(updatedBus);
+
+    // console.log(updatedBus);
     await Bookings.deleteMany({bus:busId})
 
     res.json(updatedBus)
