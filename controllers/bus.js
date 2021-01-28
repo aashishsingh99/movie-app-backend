@@ -9,7 +9,7 @@ const Bus = require('../models/Bus');
 const Bookings = require('../models/Bookings');
 
 const addBus = async (req, res) => {
-  const { name, source, destination, startTime, reachTime, date } = req.body;
+  const { name, source, destination, startTime, reachTime, date ,fare} = req.body;
   const seats = Array(40).fill(null);
   try {
     const newBus = new Bus({
@@ -20,6 +20,7 @@ const addBus = async (req, res) => {
       reachTime: reachTime,
       date: date,
       seats: seats,
+      fare: fare
     });
 
     await newBus.save();
