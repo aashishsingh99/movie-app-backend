@@ -15,7 +15,7 @@ router.post('/findBus', auth, authRole('user'), (req, res) => {
   findBus(req, res);
 });
 
-router.get('/getAllBuses', auth, authRole('admin'), (req, res) => {
+router.get('/getAllBuses', auth,  (req, res) => {
   console.log('Add bus route hi');
   getAllBuses(req, res);
 });
