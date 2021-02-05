@@ -9,7 +9,7 @@ const { ConnectionStates } = require('mongoose');
 // @desc     Get user by token
 // @access   Private
 router.get('/', auth,  (req, res) => {
-  console.log('wg')
+  
   user_by_token(req,res);
 });
 
@@ -21,7 +21,7 @@ router.post(
   check('email', 'Please include a valid email').isEmail(),
   check('password', 'Password is required').exists(),
    (req, res) => {
-    console.log('brooo')
+    
     auth_token(req,res);
   }
 );

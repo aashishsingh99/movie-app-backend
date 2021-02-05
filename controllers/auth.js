@@ -1,6 +1,5 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const config = require('config');
 const { validationResult } = require('express-validator');
 const User = require('../models/User');
 const {log_and_send_error} = require('./error');
@@ -39,7 +38,7 @@ const auth_token =async (req,res)=>{
 
       jwt.sign(
         payload,
-        config.get('jwtSecret'),
+        process.env.SECRET,
         { expiresIn: '5 days' },
         (err, token) => {
           if (err) throw err;
@@ -53,7 +52,7 @@ const auth_token =async (req,res)=>{
 }
 const user_by_token=async(req,res)=>{
     try {
-        console.log('user_by')
+        
         const user = await User.findById(req.user.id).select('-password');
       
         res.json(user);

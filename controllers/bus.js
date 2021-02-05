@@ -1,6 +1,5 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const config = require('config');
 const { validationResult } = require('express-validator');
 const User = require('../models/User');
 const { log_and_send_error } = require('./error');
@@ -48,7 +47,7 @@ const findBus = async (req, res) => {
 const getAllBuses = async (req, res) => {
   try {
     const buses = await Bus.find();
-    console.log(buses);
+    
     res.json(buses);
   } catch (err) {
     log_and_send_error(err.message, 500, 'Server Error');
@@ -64,7 +63,7 @@ const getBusById = async (req, res) => {
   };
   try {
     const bus = await Bus.findById(req.params.id).populate(options)
-    console.log(bus,'hi')
+    
     res.send(bus);
   } catch (err) {
     log_and_send_error(err.message, 500, 'Server Error');
@@ -73,13 +72,13 @@ const getBusById = async (req, res) => {
 const bookBus = async (req, res) => {
   const { seatNumber, busId } = req.body;
   try {
-    // console.log(seatNumber)
+    
     const curBus = await Bus.findById(busId);
     const newSeats = curBus.seats;
     newSeats[seatNumber] = req.user.id;
      await Bus.findByIdAndUpdate(busId, { seats: newSeats });
      const updatedBus=await Bus.findById(busId);
-    // console.log(updatedBus.seats[seatNumber]);
+    
     const newBooking = new Bookings({
       user: req.user.id,
       bus: busId,
@@ -96,12 +95,12 @@ const bookBus = async (req, res) => {
 const resetBus = async (req, res) => {
   const { busId } = req.body;
   try {
-    // const curBus = await Bus.findById(busId);
+    
     const newSeats = Array(40).fill(null);;
      await Bus.findByIdAndUpdate(busId, { seats: newSeats });
      const updatedBus=await Bus.findById(busId);
 
-    // console.log(updatedBus);
+    
     await Bookings.deleteMany({bus:busId})
 
     res.json(updatedBus)

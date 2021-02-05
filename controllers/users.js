@@ -1,6 +1,5 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const config = require('config');
 const { validationResult } = require('express-validator');
 const User = require('../models/User');
 const {log_and_send_error} = require('./error');
@@ -8,7 +7,7 @@ const {log_and_send_error} = require('./error');
 const user_register = async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    console.log(req.body);
+   
     return res.status(400).json({ errors: errors.array() });
   }
 
@@ -44,7 +43,7 @@ const user_register = async (req, res) => {
 
     jwt.sign(
       payload,
-      config.get('jwtSecret'),
+      process.env.SECRET,
       { expiresIn: '5 days' },
       (err, token) => {
         if (err) throw err;

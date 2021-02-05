@@ -19,12 +19,5 @@ router.post('/addBus',auth,authRole('admin'),(req,res)=>{
 
 })
 
-// delete bus
-
-//  Show buses
-
-
-// reset the bus with bus id
-
 
 module.exports = router;
