@@ -1,7 +1,7 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { validationResult } = require('express-validator');
-const Bus = require('../models/Bus');
+const Movie = require('../models/Movie');
 const { log_and_send_error } = require('./error');
 
 const dashboard = async (req, res) => {
@@ -13,20 +13,18 @@ const dashboard = async (req, res) => {
   }
 };
 
-const addBus = async (req, res) => {
-  const { source, destination, startTime, reachTime } = req.body;
+const addMovie = async (req, res) => {
+  const { name, startTime, reachTime } = req.body;
   try {
-    const newBus = new Bus({
-      name: source + ' ' + destination + ' ' + 'Bus',
-      source: source,
-      destination: destination,
+    const newMovie = new Movie({
+      name: name,
       startTime: startTime,
       reachTime: reachTime,
       seats: Array(40).fill(null),
     });
-    const bus = await newBus.save();
+    const movie = await newMovie.save();
 
-    res.json(bus);
+    res.json(movie);
   } catch (err) {
     log_and_send_error(err.message, 500, 'Server Error');
   }

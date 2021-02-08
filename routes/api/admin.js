@@ -14,8 +14,8 @@ router.get('/dashboard',auth,authRole('admin'),(req,res)=>{
 
 // add bus
 
-router.post('/addBus',auth,authRole('admin'),(req,res)=>{
-   addBus(req,res);
+router.post('/addMovie',auth,authRole('admin'),(req,res)=>{
+   addMovie(req,res);
 
 })
 

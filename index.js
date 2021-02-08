@@ -19,7 +19,7 @@ app.get('/', (req, res) => {
 app.use('/api/users', require('./routes/api/users'));
 app.use('/api/auth', require('./routes/api/auth'));
 app.use('/api/admin', require('./routes/api/admin'));
-app.use('/api/bus', require('./routes/api/bus'));
+app.use('/api/movie', require('./routes/api/movie'));
 
 const PORT = process.env.PORT || 5001;
 

@@ -5,9 +5,9 @@ const BookingsSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'user',
   },
-  bus: {
+  movie: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'bus',
+    ref: 'Movie',
   },
   seatNumber:{
       type: Number,
