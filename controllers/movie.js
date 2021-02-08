@@ -8,7 +8,7 @@ const Movie = require('../models/Movie');
 const Bookings = require('../models/Bookings');
 
 const addMovie = async (req, res) => {
-  const { name, startTime, reachTime, date ,fare} = req.body;
+  const { name, startTime, reachTime, date, fare, poster} = req.body;
   const seats = Array(40).fill(null);
   try {
     const newMovie = new Movie({
@@ -17,7 +17,8 @@ const addMovie = async (req, res) => {
       reachTime: reachTime,
       date: date,
       seats: seats,
-      fare: fare
+      fare: fare,
+      poster: poster,
     });
 
     await newMovie.save();

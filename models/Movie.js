@@ -22,7 +22,11 @@ const MovieSchema = new mongoose.Schema({
     required: true,
 
   },
-  seats:[ {
+  poster:{
+    type:String,
+
+  },
+  seats: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'user',
   }]
