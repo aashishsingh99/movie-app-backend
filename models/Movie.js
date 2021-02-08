@@ -5,15 +5,15 @@ const MovieSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  startTime:{
+  startTime: {
     type: String,
     required: true,
   },
-  endTime:{
+  reachTime: {
     type: String,
     required: true,
   },
-  date:{
+  date: {
     type: String,
     required: true,
   },
